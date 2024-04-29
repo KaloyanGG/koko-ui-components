@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* for the button */
+  border: none;
+}
+main {
+  /* display: flex;
+  justify-content: center; */
+  height: 100vh;
+  /* width: 100vw; */
+  padding: 200px;
+
+  .expand-collapse {
+    /*? font-size: 1em;  */
+    background-color: turquoise;
+
+    & > * {
+    }
+    .row {
+      display: flex;
+      align-items: center;
+
+      .content {
+        flex: 15;
+      }
+
+      .expand-collapse-btn {
+        flex: 1;
+        button {
+          svg,
+          svg path {
+            pointer-events: none;
+          }
+          cursor: pointer;
+          width: 100%;
+          background-color: transparent;
+        }
+      }
+    }
+
+    .bonus-info {
+      width: 100%;
+      display: none;
+    }
+  }
+}
+
+.display-block {
+  display: block !important;
+}
+
+.rotated {
+  transform: rotate(90deg);
+}

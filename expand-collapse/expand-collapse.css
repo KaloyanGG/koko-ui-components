@@ -14,7 +14,7 @@ main {
   }
 
   .expand-collapse {
-    background-color: rgb(255, 255, 218);
+    background-color: rgb(240, 248, 255);
     /* border: 1px solid black; */
     transition: height 0.2s ease-in-out;
     text-align: justify;
@@ -38,20 +38,21 @@ main {
         width: 100%;
         background-color: transparent;
 
+        /* display: flex;
+        align-items: center; */
+
         &:hover {
-          background-color: rgb(185, 255, 209);
+          background-color: rgb(179, 249, 234); /* LightGreen */
         }
         svg,
         svg path {
           pointer-events: none;
-          /* height: 100%; */
         }
       }
     }
 
     .bonus-info {
       width: 100%;
-      /* display: none; */
       max-height: 0; /* Start with 0 height */
       overflow: hidden;
       transition: max-height 0.5s ease;

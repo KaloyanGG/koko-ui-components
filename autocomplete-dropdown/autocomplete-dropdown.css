@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  /* border: none; */
+  box-sizing: border-box;
+  list-style: none;
+}
+
+main {
+  height: 100vh;
+  background-color: turquoise;
+  padding: 40vh 30vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .autocomplete-dropdown {
+    background-color: thistle;
+    /* display: flex;
+    flex-direction: column; */
+    height: 100%;
+    width: 100%;
+
+    .input-wrapper {
+      position: relative;
+      height: 20%;
+      width: 100%;
+      label {
+        position: absolute;
+        transform: translate(5%, 50%);
+        /* bottom: 0; */
+        color: lightgray;
+        font-size: 1rem;
+      }
+
+      input {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    ul {
+      display: none;
+    }
+  }
+}

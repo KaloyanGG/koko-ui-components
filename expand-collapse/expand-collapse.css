@@ -8,7 +8,7 @@
 main {
   height: 100vh;
   padding: 20vh 10vw;
-  
+
   & > * {
     margin-bottom: 20px;
   }
@@ -29,18 +29,23 @@ main {
 
       button {
         flex: 1;
+        align-self: stretch;
         min-width: 30px;
         max-width: 40px;
         border: none;
         padding: 0;
-        svg,
-        svg path {
-          pointer-events: none;
-          height: 100%;
-        }
         cursor: pointer;
         width: 100%;
         background-color: transparent;
+
+        &:hover {
+          background-color: rgb(185, 255, 209);
+        }
+        svg,
+        svg path {
+          pointer-events: none;
+          /* height: 100%; */
+        }
       }
     }
 

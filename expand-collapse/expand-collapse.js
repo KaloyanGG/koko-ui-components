@@ -3,7 +3,7 @@
  */
 function openBonusInfo(event) {
     const divExpandCollapse = event.target.parentElement.parentElement;
-    const showBonusInfoButton = divExpandCollapse.querySelector('#show-bonus-info');
+    const showBonusInfoButton = divExpandCollapse.querySelector('#show-bonus-info').querySelector('svg');
     const bonusInfo = divExpandCollapse.querySelector('.bonus-info');
 
     showBonusInfoButton.classList.toggle('rotated');

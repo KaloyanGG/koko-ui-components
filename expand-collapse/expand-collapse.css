@@ -7,7 +7,7 @@
 }
 main {
   height: 100vh;
-  padding: 200px;
+  padding: 20vh 10vw;
   
   & > * {
     margin-bottom: 20px;
@@ -29,6 +29,8 @@ main {
 
       button {
         flex: 1;
+        min-width: 30px;
+        max-width: 40px;
         border: none;
         padding: 0;
         svg,

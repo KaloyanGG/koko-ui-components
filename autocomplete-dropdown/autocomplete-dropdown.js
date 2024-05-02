@@ -1,8 +1,6 @@
 const input = document.querySelector('#autocomplete-dropdown-input');
 const label = document.querySelector('#autocomplete-dropdown-label')
 const ul = document.querySelector('#item-list');
-
-
 const inputWrapper = document.querySelector('.input-wrapper');
 
 input.onfocus = () => {
@@ -11,14 +9,19 @@ input.onfocus = () => {
     inputWrapper.classList.toggle('focused');
 }
 
-
 input.onblur = () => {
     ul.style.display = 'none';
     label.classList.toggle('label-for-input-focused');
     inputWrapper.classList.toggle('focused');
-    input.value='';
+    input.value = '';
 }
 
 inputWrapper.onclick = () => {
     input.focus();
+}
+
+ul.onclick = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log('hi');
 }

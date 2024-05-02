@@ -3,25 +3,36 @@ const label = document.querySelector('#autocomplete-dropdown-label')
 const ul = document.querySelector('#item-list');
 const inputWrapper = document.querySelector('.input-wrapper');
 
+const autocompleteDropdown = document.querySelector('.autocomplete-dropdown')
+
 input.onfocus = () => {
     ul.style.display = 'block';
-    label.classList.toggle('label-for-input-focused');
-    inputWrapper.classList.toggle('focused');
+    label.classList.add('label-for-input-focused');
+    inputWrapper.classList.add('focused');
 }
 
-input.onblur = () => {
-    ul.style.display = 'none';
-    label.classList.toggle('label-for-input-focused');
-    inputWrapper.classList.toggle('focused');
-    input.value = '';
-}
+window.onclick = (event) => {
 
-inputWrapper.onclick = () => {
+    if (!autocompleteDropdown.contains(event.target)) {
+        ul.style.display = 'none';
+        label.classList.remove('label-for-input-focused');
+        inputWrapper.classList.remove('focused');
+        input.value = '';
+        return;
+    }
+    // stop the ul clicking from ul.style.display block
+    // if(event.target!==inpuW)
     input.focus();
+
 }
 
-ul.onclick = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    console.log('hi');
+
+ul.onclick = ({ target }) => {
+
+    if (target.tagName !== "LI") return;
+
+    input.value = target.innerText;
+    ul.style.display = 'none';
+
+
 }

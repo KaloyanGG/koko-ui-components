@@ -9,12 +9,13 @@
 
 :root {
   --input-focused: rgb(31, 128, 239);
+  --border-radius: 5px;
 }
 
 main {
   height: 100vh;
   background-color: white;
-  padding: 40vh 30vw;
+  padding: 47vh 37vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,57 +28,79 @@ main {
     & * {
       background-color: inherit;
     }
-    & > * {
-      padding: 0 3%;
-    }
+    /* & > * {
+      padding: 0 2%;
+    } */
+    /* hr{
+      display: block;
+      position:absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 7px;
+      width: 100%;
+      background-color: black;
+    } */
     .input-wrapper {
       position: relative;
-      height: 20%;
+      height: 100%;
       width: 100%;
-      border: 1px solid gray;
-      border-radius: 5px;
+      border: 2px solid lightgray;
+      border-radius: var(--border-radius);
+      padding: 0 2%;
 
       label {
         position: absolute;
-        transform: translate(0%, 50%);
+        top: 50%;
+        line-height: 1;
+        transform: translateY(calc(-50% - 2px));
         color: lightgray;
         pointer-events: none;
-        font-family: "Times New Roman", Times, serif;
+        /* font-family: "Times New Roman", Times, serif; */
         transition: all 0.2s ease;
+        text-align: center;
+        padding: 0 1%;
       }
 
       label.label-for-input-focused {
-        transform: translate(0%, -50%);
+        top: 0;
+
         color: var(--input-focused);
         font-size: 0.9rem;
       }
 
+      &:hover {
+        border-color: black;
+      }
+
       input {
         width: 100%;
-        height: 100%;
-
-        padding: 3%;
-        &:hover {
-          border-color: black;
-        }
-        &:focus {
-          border-width: 2px;
-          border-color: var(--input-focused);
-        }
+        height: 20%;
+        /* padding: 3%; */
+        /* border: 2px solid lightgray; */
       }
     }
 
     ul {
-      display: none;
-      border: 1px solid gray;
+      /* display: none; */
+      border: 1px solid rgb(235, 235, 235);
       border-top: none;
-      border-radius: 5px;
-      li{
-        padding: 2% 0;
-        &:hover{
+      border-radius: var(--border-radius);
+      max-height: 15vh;
+      overflow: scroll;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scroll-behavior: smooth;
+      li {
+        padding: 2% 2%;
+        &:hover {
           background-color: red;
         }
       }
     }
   }
+}
+
+.focused {
+  border-width: 2px !important;
+  border-color: var(--input-focused) !important;
 }

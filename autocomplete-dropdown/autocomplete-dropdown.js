@@ -18,21 +18,19 @@ window.onclick = (event) => {
         label.classList.remove('label-for-input-focused');
         inputWrapper.classList.remove('focused');
         input.value = '';
-        return;
     }
-    // stop the ul clicking from ul.style.display block
-    // if(event.target!==inpuW)
-    input.focus();
 
 }
+inputWrapper.onclick = (event) => {
+    event.stopPropagation();
+    input.focus();
+}
 
+ul.onclick = (event) => {
+    event.stopPropagation();
 
-ul.onclick = ({ target }) => {
+    if (event.target.tagName !== "LI") return;
 
-    if (target.tagName !== "LI") return;
-
-    input.value = target.innerText;
+    input.value = event.target.innerText;
     ul.style.display = 'none';
-
-
 }

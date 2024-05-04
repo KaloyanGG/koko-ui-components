@@ -9,15 +9,23 @@ const svgCancel = document.querySelector('#cancel');
 const svgArrow = document.querySelector('#dropdown-arrow')
 const svgArrowBtn = document.querySelector('#svg-btn');
 
-let liContents = Array.from(document.querySelectorAll('#item-list li')).map(li => li.innerText);
+// let liContents = Array.from(document.querySelectorAll('#item-list li')).map(li => li.innerText);
+let liContents = [
+    'To Kill a Mockingbird',
+    'The Catcher in the Rye',
+    '1984',
+    'The Great Gatsby',
+    'Pride and Prejudice',
+    'Pride and Prejudice 2',
+    'The Lord of the Rings',
+    'The Hobbit',
+    'War and Peace',
+    'One Hundred Years of Solitude',
+    'The Grapes of Wrath',
+    'The Da Vinci Code',
+];
 
-// input.addEventListener('focus', (event) => {
-//     console.log('focused')
-// })
-// input.addEventListener('blur', (event) => {
-
-//     console.log('blurred')
-// })
+fillItemList();
 
 window.addEventListener('click', (event) => {
 
@@ -34,13 +42,8 @@ window.addEventListener('click', (event) => {
         inputWrapper.classList.remove('focused');
         svgArrow.classList.remove('rotated');
         input.value = '';
-        // input.dispatchEvent(
-        //     new Event('input',{
-        //         bubbles: true,
-        //         cancelable: true
-        //     })
-        // )
         input.blur();
+        fillItemList();
     }
 
 })
@@ -56,7 +59,7 @@ svgArrow.addEventListener('click', (event) => {
 
     svgArrowBtn.classList.add('animated');
 })
-  
+
 
 //! impossible because of the input.focus() for some reason
 // svgArrow.addEventListener('mousedown', (event) => {
@@ -82,7 +85,7 @@ ulItemList.addEventListener('click', (event) => {
 input.addEventListener('input', (event) => {
     const value = event.target.value;
     ulItemList.classList.add('d-block');
-
+    console.log(ulItemList)
     const updatedList = liContents.filter((content) => {
         return content.toLowerCase().includes(value.toLowerCase());
     })
@@ -110,21 +113,12 @@ function updateList(updatedList) {
     });
 }
 
+function fillItemList() {
+    ulItemList.innerHTML = '';
 
-function isFocused(elem) {
-    return document.activeElement === elem;
+    liContents.forEach(content => {
+        const li = document.createElement('li');
+        li.textContent = content;
+        ulItemList.appendChild(li);
+    });
 }
-
-
-// function isHovered(elementId) {
-//     const element = document.querySelector(`#${elementId}:hover`);
-//     return Boolean(element);
-// }
-
-// setInterval(() => {
-//     if (isHovered('svg-btn')) {
-//         console.log('Element is being hovered');
-//     } else {
-//         console.log('Element is not being hovered');
-//     }
-// }, 200);

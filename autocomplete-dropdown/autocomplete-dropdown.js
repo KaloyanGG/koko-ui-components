@@ -6,7 +6,7 @@ const label = document.querySelector('#autocomplete-dropdown-label');
 const input = document.querySelector('#autocomplete-dropdown-input');
 
 const svgCancel = document.querySelector('#cancel');
-const svgArrow = document.querySelector('#dropdown-arrow');
+const svgArrow = document.querySelector('#svg-btn');
 
 let liContents = Array.from(document.querySelectorAll('#item-list li')).map(li => li.innerText);
 
@@ -40,19 +40,31 @@ window.addEventListener('click', (event) => {
 
 svgArrow.addEventListener('click', (event) => {
     event.stopPropagation();
-
     svgArrow.classList.toggle('rotated');
+    svgArrow.classList.remove('animated');
     ulItemList.classList.toggle('d-block');
     label.classList.add('label-for-input-focused');
 
     input.focus();
+    
+    svgArrow.classList.add('animated');
 })
+
+//! impossible because of the input.focus() for some reason
+// svgArrow.addEventListener('mousedown', (event) => {
+//     svgArrow.classList.remove('animated');
+//     void svgArrow.offsetWidth;
+
+//     svgArrow.classList.add('animated');
+// })
+
 
 ulItemList.addEventListener('click', (event) => {
     event.stopPropagation();
+
     if (event.target.tagName !== "LI") return;
 
-    svgArrow.classList.toggle('rotated');
+    // svgArrow.classList.toggle('rotated');
     ulItemList.classList.toggle('d-block');
 
     input.value = event.target.innerText;
@@ -72,10 +84,8 @@ input.addEventListener('input', (event) => {
 })
 
 function updateList(updatedList) {
-    
+
     ulItemList.innerHTML = '';
-    // console.log('-input')
-    // // debugger;
 
     if (updatedList.length === 0) {
         const p = document.createElement('div');

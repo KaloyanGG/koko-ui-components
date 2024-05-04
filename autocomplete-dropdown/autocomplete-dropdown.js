@@ -73,7 +73,7 @@ svgArrow.addEventListener('click', (event) => {
 ulItemList.addEventListener('click', (event) => {
     event.stopPropagation();
 
-    if (event.target.tagName !== "LI") return;
+    if (event.target.tagName !== "LI" || event.target.textContent === "No options") return;
 
     ulItemList.classList.toggle('d-block');
 
@@ -98,10 +98,11 @@ function updateList(updatedList) {
     ulItemList.innerHTML = '';
 
     if (updatedList.length === 0) {
-        const p = document.createElement('div');
-        p.style.padding = "2% 2%";
-        p.innerText = 'No options';
-        ulItemList.appendChild(p);
+        const li = document.createElement('li');
+        li.textContent = 'No options';
+        li.classList.add('no-hover');
+        li.style.color = 'gray';
+        ulItemList.appendChild(li);
         console.log(ulItemList)
         return;
     }

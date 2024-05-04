@@ -1,6 +1,5 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Questrial&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-html{
+@import url("https://fonts.googleapis.com/css2?family=Questrial&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+html {
   font-family: "Questrial", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -92,8 +91,8 @@ main {
 
       button {
         margin: auto;
-        width: 25px;
-        height: 25px;
+        width: 20px;
+        height: 20px;
         border-radius: 50%;
         position: relative;
         background-color: transparent;
@@ -129,8 +128,10 @@ main {
         }
       }
 
-      svg#clear {
+      button#svg-btn-cancel{
         display: none;
+        width: 20px;
+        height: 20px;
       }
     }
 
@@ -168,8 +169,8 @@ main {
   display: block !important;
 }
 
-.no-hover{
-  &:hover{
+.no-hover {
+  &:hover {
     background-color: unset !important;
   }
 }

@@ -7,7 +7,10 @@ const input = document.querySelector('#autocomplete-dropdown-input');
 
 const svgCancel = document.querySelector('#cancel');
 const svgArrow = document.querySelector('#dropdown-arrow')
-const svgArrowBtn = document.querySelector('#svg-btn');
+const svgArrowBtn = document.querySelector('#svg-btn-arrow');
+const svgCancelBtn = document.querySelector('#svg-btn-cancel');
+
+// let choice = '';
 
 // let liContents = Array.from(document.querySelectorAll('#item-list li')).map(li => li.innerText);
 let liContents = [
@@ -41,6 +44,7 @@ window.addEventListener('click', (event) => {
         label.classList.remove('label-for-input-focused');
         inputWrapper.classList.remove('focused');
         svgArrow.classList.remove('rotated');
+        svgCancelBtn.classList.remove('d-block');
         input.value = '';
         input.blur();
         fillItemList();
@@ -48,7 +52,7 @@ window.addEventListener('click', (event) => {
 
 })
 
-svgArrow.addEventListener('click', (event) => {
+svgArrowBtn.addEventListener('click', (event) => {
     event.stopPropagation();
     svgArrow.classList.toggle('rotated');
     svgArrowBtn.classList.remove('animated');
@@ -58,6 +62,17 @@ svgArrow.addEventListener('click', (event) => {
     input.focus();
 
     svgArrowBtn.classList.add('animated');
+})
+
+svgCancelBtn.addEventListener('click', (event) => {
+    event.stopImmediatePropagation();
+
+    input.value = '';
+    fillItemList();
+
+    svgCancelBtn.classList.remove('d-block');
+    input.focus();
+
 })
 
 
@@ -78,6 +93,7 @@ ulItemList.addEventListener('click', (event) => {
     ulItemList.classList.toggle('d-block');
 
     input.value = event.target.innerText;
+    svgCancelBtn.classList.add('d-block');
     input.focus();
 
 })

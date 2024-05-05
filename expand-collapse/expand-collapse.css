@@ -15,7 +15,6 @@ main {
 
   .expand-collapse {
     background-color: rgb(240, 248, 255);
-    /* border: 1px solid black; */
     transition: height 0.2s ease-in-out;
     text-align: justify;
 
@@ -38,11 +37,11 @@ main {
         width: 100%;
         background-color: transparent;
 
-        /* display: flex;
-        align-items: center; */
+        display: flex;
+        align-items: center;
 
         &:hover {
-          background-color: rgb(179, 249, 234); /* LightGreen */
+          background-color: rgb(179, 249, 234);
         }
         svg,
         svg path {

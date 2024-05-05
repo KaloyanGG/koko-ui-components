@@ -10,9 +10,6 @@ const svgArrow = document.querySelector('#dropdown-arrow')
 const svgArrowBtn = document.querySelector('#svg-btn-arrow');
 const svgCancelBtn = document.querySelector('#svg-btn-cancel');
 
-// let choice = '';
-
-// let liContents = Array.from(document.querySelectorAll('#item-list li')).map(li => li.innerText);
 let liContents = [
     'To Kill a Mockingbird',
     'The Catcher in the Rye',

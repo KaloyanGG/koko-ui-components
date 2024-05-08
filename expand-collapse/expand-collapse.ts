@@ -24,7 +24,7 @@ function renderExpandCollapse(container: HTMLElement, content: Content) {
 
     const button = container.querySelector('.expand-collapse-btn') as HTMLButtonElement;
     button.addEventListener('click', (event: MouseEvent) => {
-        const divExpandCollapse = (event.target as HTMLElement).parentElement!.parentElement as HTMLDivElement;
+        const divExpandCollapse = (event.target as HTMLButtonElement).parentElement!.parentElement as HTMLDivElement;
         const bonusInfo = divExpandCollapse.querySelector('.bonus-info') as HTMLDivElement;
 
         const showBonusInfoSvg = divExpandCollapse!.querySelector('.expand-collapse-btn')!.querySelector('svg')!;

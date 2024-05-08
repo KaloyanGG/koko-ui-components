@@ -23,14 +23,20 @@ html {
   /* * not working * */
   /* --half-border-width: calc(- var(--border-width)/2); */
 }
-
 main {
+  
   height: 100vh;
+  padding: 40vh 40vw;
   background-color: white;
-  padding: 47vh 37vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+  & > * {
+    margin-bottom: 20px;
+  }
+
+  div {
+    min-height: 5vh;
+    background-color: inherit;
+  }
 
   .autocomplete-dropdown {
     &,
@@ -84,7 +90,7 @@ main {
 
       input {
         border-radius: inherit;
-        height: 100%;
+        /* height: 100%; */
         flex: 10;
       }
 
@@ -127,7 +133,7 @@ main {
         }
       }
 
-      button#svg-btn-cancel{
+      button.svg-btn-cancel {
         display: none;
         width: 20px;
         height: 20px;

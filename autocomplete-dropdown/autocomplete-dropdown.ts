@@ -1,5 +1,8 @@
-"use strict";
-function renderAutocompleteDropdown(container, data) {
+type Data = {
+    title: string,
+    items: string[],
+}
+function renderAutocompleteDropdown(container: HTMLElement, data: Data) {
     container.innerHTML += `
     <div class="autocomplete-dropdown">
         <div class="input-wrapper">
@@ -22,24 +25,26 @@ function renderAutocompleteDropdown(container, data) {
             ${data.items.map(item => `<li>${item}</li>`).join('')}
         </ul>
     </div>
-    `;
-    const autocompleteDropdown = container.querySelector('.autocomplete-dropdown');
-    const inputWrapper = container.querySelector('.input-wrapper');
-    const ulItemList = container.querySelector('.item-list');
-    const label = container.querySelector('.autocomplete-dropdown-label');
-    const input = container.querySelector('.autocomplete-dropdown-input');
-    const svgArrow = container.querySelector('.dropdown-arrow');
-    const svgArrowBtn = container.querySelector('.svg-btn-arrow');
-    const svgCancelBtn = container.querySelector('.svg-btn-cancel');
+    `
+    const autocompleteDropdown = container.querySelector('.autocomplete-dropdown') as HTMLDivElement;
+    const inputWrapper = container.querySelector('.input-wrapper') as HTMLDivElement;
+    const ulItemList = container.querySelector('.item-list') as HTMLUListElement;
+
+    const label = container.querySelector('.autocomplete-dropdown-label') as HTMLLabelElement;
+    const input = container.querySelector('.autocomplete-dropdown-input') as HTMLInputElement;
+
+    const svgArrow = container.querySelector('.dropdown-arrow') as SVGElement;
+    const svgArrowBtn = container.querySelector('.svg-btn-arrow') as HTMLButtonElement;
+    const svgCancelBtn = container.querySelector('.svg-btn-cancel') as HTMLButtonElement;
+
     window.addEventListener('click', (event) => {
-        if (autocompleteDropdown.contains(event.target)) {
+        if (autocompleteDropdown.contains((event.target as HTMLElement))) {
             input.focus();
             label.classList.add('label-for-input-focused');
             inputWrapper.classList.add('focused');
             svgArrow.classList.add('rotated');
             ulItemList.classList.add('d-block');
-        }
-        else {
+        } else {
             event.preventDefault();
             ulItemList.classList.remove('d-block');
             label.classList.remove('label-for-input-focused');
@@ -49,48 +54,64 @@ function renderAutocompleteDropdown(container, data) {
             input.value = '';
             input.blur();
         }
-    });
+    })
+
     svgArrowBtn.addEventListener('click', (event) => {
         event.stopPropagation();
         svgArrow.classList.toggle('rotated');
         svgArrowBtn.classList.remove('animated');
         ulItemList.classList.toggle('d-block');
         label.classList.add('label-for-input-focused');
+
         input.focus();
+
         svgArrowBtn.classList.add('animated');
-    });
+    })
+
     //! impossible because of the input.focus() for some reason
     // svgArrow.addEventListener('mousedown', (event) => {
     //     svgArrow.classList.remove('animated');
     //     void svgArrow.offsetWidth;
+
     //     svgArrow.classList.add('animated');
     // })
+
     svgCancelBtn.addEventListener('click', (event) => {
         event.stopPropagation();
+
         input.value = '';
+
         svgCancelBtn.classList.remove('d-block');
         input.focus();
-    });
+    })
+
     ulItemList.addEventListener('click', (event) => {
         event.stopPropagation();
-        const target = event.target;
-        if (target.tagName !== "LI" || target.textContent === "No options")
-            return;
+        const target = event.target as HTMLUListElement;
+
+        if (target.tagName !== "LI" || target.textContent === "No options") return;
+
         ulItemList.classList.toggle('d-block');
+
         input.value = target.innerText;
         svgCancelBtn.classList.add('d-block');
         input.focus();
-    });
+    })
+
     input.addEventListener('input', (event) => {
-        const value = event.target.value;
+        const value = (event.target as HTMLInputElement).value;
         ulItemList.classList.add('d-block');
         const updatedList = data.items.filter((content) => {
             return content.toLowerCase().includes(value.toLowerCase());
-        });
+        })
+
         updateList(updatedList);
-    });
-    function updateList(updatedList) {
+    })
+
+    function updateList(updatedList: string[]) {
+
         ulItemList.innerHTML = '';
+
         if (updatedList.length === 0) {
             const li = document.createElement('li');
             li.textContent = 'No options';
@@ -99,6 +120,7 @@ function renderAutocompleteDropdown(container, data) {
             ulItemList.appendChild(li);
             return;
         }
+
         updatedList.forEach(item => {
             const li = document.createElement('li');
             li.innerText = item;
@@ -106,15 +128,18 @@ function renderAutocompleteDropdown(container, data) {
         });
     }
 }
-const main = document.querySelector('main');
-renderAutocompleteDropdown(main.querySelector('#a-d-1'), {
+
+const main = document.querySelector('main')!;
+
+renderAutocompleteDropdown(main.querySelector('#a-d-1')!, {
     title: 'Fruit',
     items: ['Apple', 'Banana', 'Cherry', 'Date', 'Grape', 'Kiwi', 'Orange', 'Peach', 'Pear', 'Plum']
-});
-renderAutocompleteDropdown(main.querySelector('#a-d-2'), {
+}); 
+renderAutocompleteDropdown(main.querySelector('#a-d-2')!, {
     title: 'Movie',
     items: ['Avengers', 'Black Panther', 'Inception', 'Interstellar', 'Interstellar', 'The Dark Knight', 'The Shawshank Redemption', 'Pulp Fiction', 'Fight Club', 'The Matrix', 'Forrest Gump']
 });
+
 // renderAutocompleteDropdown(main, {
 //     title: 'Movie',
 //     items: ['Avengers', 'Black Panther', 'Inception', 'Interstellar', 'Interstellar 2', 'The Dark Knight', 'The Shawshank Redemption', 'Pulp Fiction', 'Fight Club', 'The Matrix', 'Forrest Gump']

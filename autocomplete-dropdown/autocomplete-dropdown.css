@@ -10,17 +10,19 @@
     background-color: inherit;
   }
 
-  li,
-  input {
-    padding: 0 4%;
-  }
-
   .input-wrapper {
     position: relative;
     display: flex;
+    justify-content: space-between;
 
     border: var(--border-width) solid var(--light-gray);
     border-radius: var(--border-radius);
+    padding-left: 15px;
+    padding-right: 15px;
+
+    &:hover {
+      border-color: black;
+    }
 
     label {
       position: absolute;
@@ -30,8 +32,7 @@
       pointer-events: none;
       transition: all 0.2s ease;
       text-align: center;
-      padding: 0 2%;
-      left: 2%;
+      /* left: 15px; */
     }
 
     label.label-for-input-focused {
@@ -42,23 +43,31 @@
 
       color: var(--input-focused);
       font-size: 0.8em;
-    }
-
-    &:hover {
-      border-color: black;
+      &::before {
+        z-index: -10;
+        position: absolute;
+        content: "";
+        left: 50%; 
+        transform: translateX(-50%);
+        background-color: inherit;
+        width: 120%;
+        height: 100%;
+        /* background-color: red; */
+        box-sizing: content-box;
+      }
     }
 
     input {
       border-radius: inherit;
       font-size: 1em;
-      /* flex-grow: 1; */
-      /* flex: 10; */
+      min-width: 0;
+      /* padding-left: 4%; */
+      flex-grow: 1;
     }
 
     button {
-      margin: auto;
-      width: 20px;
-      /* height: 20px;  */
+      margin-top: auto;
+      margin-bottom: auto;
       border-radius: 50%;
       position: relative;
       background-color: transparent;
@@ -67,8 +76,7 @@
       }
 
       svg {
-        width: 100%;
-        /* height: 100%; */
+        width: 20px;
         border-radius: inherit;
         background-color: transparent;
       }
@@ -112,8 +120,7 @@
     scrollbar-width: thin;
     scroll-behavior: smooth;
     li {
-      padding-top: 2%;
-      padding-bottom: 2%;
+      padding: 2% 15px;
       &:hover {
         background-color: var(--lighter-gray);
       }

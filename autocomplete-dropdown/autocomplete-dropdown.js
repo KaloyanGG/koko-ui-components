@@ -3,8 +3,8 @@ function renderAutocompleteDropdown(container, data) {
     container.innerHTML += `
     <div class="autocomplete-dropdown">
         <div class="input-wrapper">
-            <label for="i" class="autocomplete-dropdown-label" for="autocomplete-dropdown-input">${data.title}</label>
-            <input id="i"autocomplete="off" type="text" name="autocomplete-dropdown-input" class="autocomplete-dropdown-input">
+            <label class="autocomplete-dropdown-label" for="autocomplete-dropdown-input">${data.title}</label>
+            <input autocomplete="off" type="text" name="autocomplete-dropdown-input" class="autocomplete-dropdown-input">
             <button type="button" class="svg-btn-cancel">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                     <path
@@ -38,6 +38,7 @@ function renderAutocompleteDropdown(container, data) {
             inputWrapper.classList.add('focused');
             svgArrow.classList.add('rotated');
             ulItemList.classList.add('d-block');
+            updateList(data.items);
         }
         else {
             event.preventDefault();
@@ -113,7 +114,7 @@ renderAutocompleteDropdown(main.querySelector('#a-d-1'), {
 });
 renderAutocompleteDropdown(main.querySelector('#a-d-2'), {
     title: 'Movie',
-    items: ['Avengers', 'Black Panther', 'Inception', 'Interstellar', 'Interstellar', 'The Dark Knight', 'The Shawshank Redemption', 'Pulp Fiction', 'Fight Club', 'The Matrix', 'Forrest Gump']
+    items: ['Avengers', 'Black Panther', 'Inception', 'Interstellar', 'The Dark Knight', 'Interstellar 2', 'The Shawshank Redemption', 'Pulp Fiction', 'Fight Club', 'The Matrix', 'Forrest Gump']
 });
 // renderAutocompleteDropdown(main, {
 //     title: 'Movie',

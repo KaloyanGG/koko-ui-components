@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  list-style: none;
+  line-height: 1;
+}
+
+section {
+  height: 50vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+
+  --small-border-width: 5px;
+  --big-border-width: calc(var(--small-border-width) * 6);
+  --difference-in-borders: calc(
+    var(--big-border-width) - var(--small-border-width)
+  );
+  h1 {
+    width: 100%;
+  }
+
+  div.one {
+    background-color: bisque;
+    height: 100px;
+    width: 55vw;
+    border: var(--small-border-width) solid black;
+    border-bottom: 0;
+    display: grid;
+    align-content: end;
+    h1 {
+      padding: 0 15%;
+    }
+  }
+
+  div.two {
+    background-color: turquoise;
+    height: 150px;
+    width: 55vw;
+    border: var(--big-border-width) solid black;
+    border-top: 0;
+    h1 {
+      /*  ! only works when child is in another container
+            padding = 0 15% + 15% of its border - difference in borders 
+            which transforms to:
+            padding = 0 15% - (1 - 2 * the percentage as decimal) * difference in borders
+      */
+      padding: 0
+        calc(15% - calc(((1 - 2 * 0.15) * var(--difference-in-borders))));
+    }
+  }
+
+  div.three {
+    background-color: bisque;
+    height: 100px;
+    width: 55vw;
+    border: var(--small-border-width) solid black;
+    border-bottom: 0;
+    display: grid;
+    align-content: end;
+    padding: 0 10%;
+  }
+
+  div.four {
+    background-color: turquoise;
+    height: 150px;
+    width: 55vw;
+    /*  ! only works when child is direct descendant
+        padding = 0 10% - difference in borders
+    */
+    border: var(--big-border-width) solid black;
+    border-top: 0;
+    padding: 0 calc(10% - var(--difference-in-borders));
+  }
+}

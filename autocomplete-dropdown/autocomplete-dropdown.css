@@ -120,7 +120,7 @@
     scrollbar-width: thin;
     scroll-behavior: smooth;
     li {
-      padding: 2% 15px;
+      padding: 2% 16px;
       &:hover {
         background-color: var(--lighter-gray);
       }

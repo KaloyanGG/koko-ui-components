@@ -1,3 +1,19 @@
+:root {
+  --input-focused: rgb(31, 128, 239);
+  --border-radius: 5px;
+
+  --border-width-small: 1px;
+  --border-width-large: 2px;
+  --difference-in-borders: calc(
+    var(--border-width-large) - var(--border-width-small)
+  );
+
+  --light-gray: lightgray;
+  --lighter-gray: rgb(240, 240, 240);
+  /* * not working * */
+  /* --half-border-width: calc(- var(--border-width)/2); */
+}
+
 .autocomplete-dropdown {
   &,
   .input-wrapper {
@@ -15,10 +31,9 @@
     display: flex;
     justify-content: space-between;
 
-    border: var(--border-width) solid var(--light-gray);
+    border: var(--border-width-large) solid var(--light-gray);
     border-radius: var(--border-radius);
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 0 15px;
 
     &:hover {
       border-color: black;
@@ -32,12 +47,11 @@
       pointer-events: none;
       transition: all 0.2s ease;
       text-align: center;
-      /* left: 15px; */
     }
 
     label.label-for-input-focused {
       /* not working 
-      top: calc(- calc(var(--border-width)/2));
+      top: calc(- calc(var(--border-width-large)/2));
       must be NOT dynamic */
       top: -1px;
 
@@ -47,13 +61,11 @@
         z-index: -10;
         position: absolute;
         content: "";
-        left: 50%; 
+        left: 50%;
         transform: translateX(-50%);
         background-color: inherit;
         width: 120%;
         height: 100%;
-        /* background-color: red; */
-        box-sizing: content-box;
       }
     }
 
@@ -61,7 +73,6 @@
       border-radius: inherit;
       font-size: 1em;
       min-width: 0;
-      /* padding-left: 4%; */
       flex-grow: 1;
     }
 
@@ -108,10 +119,11 @@
   position: relative;
   ul {
     width: 100%;
+
     z-index: 1;
     position: absolute;
     display: none;
-    border: 1px solid rgb(235, 235, 235);
+    border: var(--border-width-small) solid rgb(235, 235, 235);
     border-top: none;
     border-radius: var(--border-radius);
     max-height: 15vh;
@@ -120,7 +132,14 @@
     scrollbar-width: thin;
     scroll-behavior: smooth;
     li {
-      padding: 2% 16px;
+      /* padding: 0.5vh
+        calc(5% + calc(((1 + 2 * 0.05) * var(--difference-in-borders)))); */
+      /* padding: 0
+        calc(
+          20% + 0.2 * var(--border-width-large) + var(--difference-in-borders)
+        ); */
+      padding: 0 16px;
+
       &:hover {
         background-color: var(--lighter-gray);
       }
@@ -129,7 +148,7 @@
 }
 
 .focused {
-  border-width: var(--border-width) !important;
+  border-width: var(--border-width-large) !important;
   border-color: var(--input-focused) !important;
 }
 

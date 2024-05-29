@@ -1,74 +1,99 @@
-//* ol
-const orderedList = document.querySelector('ol')!;
+const ol = document.querySelector('ol')!;
+const liItems = document.querySelectorAll('li');
+const submitBtn = document.querySelector('button#add-item') as HTMLButtonElement;
+const inputElement = document.querySelector('input')!;
 
-//* li list items
-const draggableListItems = document.querySelectorAll('li');
+const form = document.querySelector('form')!;
+console.log(form)
+form.onsubmit = (event: SubmitEvent) => {
+    event.preventDefault();
+    const value = inputElement.value.trim();
+    if (!value) {
+        return alert('Please insert a value');
+    }
+    const li = document.createElement('li');
+    li.setAttribute(
+        'id',
+        (Array.from(ol.children)
+            .reduce((maxId, li) => Math.max(maxId, parseInt(li.id)), 0) + 1)
+            .toString()
+    );
+    li.textContent = value;
+    ol.appendChild(li);
+    inputElement.value = '';
+}
 
-orderedList.addEventListener('dragover', (event) => {
+
+
+let arrayOfLiItems = [...liItems]
+
+let times = 1
+let elementsAbove = []
+let elementsBelow = []
+ol.addEventListener('dragover', (event: DragEvent) => {
     event.preventDefault();
 
-    let offset = Number.NEGATIVE_INFINITY;
-    let closestElement;
+    const hoveredElem = event.target as HTMLLIElement | HTMLOListElement;
+    const draggedElement = ol.querySelector('.dragged') as HTMLLIElement;
+    const height = draggedElement.getBoundingClientRect().height;
+    const no = document.querySelector('.no-pointer-events')
+    if (hoveredElem.tagName === "LI"
+        && hoveredElem !== draggedElement
+        // && no === null
+    ) {
+        console.log(no)
 
-    for (const listItem of draggableListItems) {
-        const rect = listItem.getBoundingClientRect();
-        const newOffset = event.clientY - rect.top - rect.height / 2;
-        if (newOffset < 0 && newOffset > offset) {
-            offset = newOffset;
-            closestElement = listItem;
+        const positionHovered = parseInt(hoveredElem.getAttribute('data-position')!);
+        const positionDragged = parseInt(draggedElement.getAttribute('data-position')!);
+
+        draggedElement.style.transform = `translateY(${height * (positionHovered - positionDragged)}px)`;
+        if (positionDragged > positionHovered) {
+            if ((hoveredElem as any).moved !== true) {
+                hoveredElem.style.transform = `translateY(${height}px)`;
+                (hoveredElem as any).moved = true;
+            } else {
+                hoveredElem.style.transform = ``;
+                (hoveredElem as any).moved = false;
+            }
+        } else {
+            if ((hoveredElem as any).moved !== true) {
+                hoveredElem.style.transform = `translateY(-${height}px)`;
+                (hoveredElem as any).moved = true;
+            } else {
+                hoveredElem.style.transform = ``;
+                (hoveredElem as any).moved = false;
+            }
+
         }
     }
-    const draggable = document.querySelector('.dragging') as HTMLLIElement;
-    if (closestElement == null) {
-        orderedList.appendChild(draggable);
-    }else{
-        orderedList.insertBefore(draggable, closestElement)
-    }
 
 })
 
-
-draggableListItems.forEach(draggableListItem => {
-    draggableListItem.addEventListener('dragstart', (event) => {
-        draggableListItem.classList.add('dragging');
-
-        const target = event.target as HTMLLIElement;
-        event.dataTransfer?.setData('text', target.id)
-    });
-})
-draggableListItems.forEach(draggableListItem => {
-    draggableListItem.addEventListener('dragend', (event) => {
-        draggableListItem.classList.remove('dragging');
-    });
-})
-
-// function logAboveElement(){
-//     const draggableElements = [...container.querySelectorAll('.draggable')];
-
-//     console.log(draggableElements);
+// function getNumberOfElementsWeWentInto(event: DragEvent, parent: HTMLElement, heightOfOneElement: number) {
+//     const mouseY = event.clientY;
+//     const firstChildTop = parent.firstElementChild!.getBoundingClientRect().top;
+//     const mouseDistanceFromFirstChildTop = mouseY - firstChildTop;
+//     return Math.floor(mouseDistanceFromFirstChildTop / heightOfOneElement);
 // }
 
 
+liItems.forEach((li: HTMLLIElement) => {
 
+    li.addEventListener('transitionstart', () => {
+        li.classList.add('no-pointer-events')
+    });
+    li.addEventListener('transitionend', () => {
+        li.classList.remove('no-pointer-events')
+    });
+    li.addEventListener('dragstart', (event) => {
+        // setTimeout(() => {
+        li.classList.add('dragged')
+        // li.addEventListener('transtion')
+        // },0)
+        // li.setAttribute('initialY', `${event.clientY}`)
+    })
+    li.addEventListener('dragend', () => {
+        li.classList.remove('dragged')
+    })
 
-
-
-
-
-
-function allowDrop(event: DragEvent) {
-    // console.log('hi')
-    event.preventDefault();
-}
-
-function drop(event: DragEvent) {
-    event.preventDefault();
-    var data = event.dataTransfer!.getData("text");
-    console.log(event.target);
-    (event.target as HTMLOListElement).appendChild(document.getElementById(data)!);
-}
-function dragStart(event: DragEvent) {
-    console.log('drag start');
-    const target = event.target as HTMLLIElement;
-    event.dataTransfer?.setData('text', target.id)
-}
+})

@@ -33,28 +33,32 @@ ol.addEventListener('dragover', (event) => {
         && hoveredElem !== draggedElement
     // && no === null
     ) {
-        console.log(no);
+        // console.log(no)
+        // console.log(hoveredElem)
         const positionHovered = parseInt(hoveredElem.getAttribute('data-position'));
         const positionDragged = parseInt(draggedElement.getAttribute('data-position'));
-        draggedElement.style.transform = `translateY(${height * (positionHovered - positionDragged)}px)`;
         if (positionDragged > positionHovered) {
             if (hoveredElem.moved !== true) {
                 hoveredElem.style.transform = `translateY(${height}px)`;
                 hoveredElem.moved = true;
+                draggedElement.style.transform = `translateY(${height * (positionHovered - positionDragged)}px)`;
             }
             else {
                 hoveredElem.style.transform = ``;
                 hoveredElem.moved = false;
+                draggedElement.style.transform = `translateY(${height * (positionHovered - positionDragged + 1)}px)`;
             }
         }
         else {
             if (hoveredElem.moved !== true) {
                 hoveredElem.style.transform = `translateY(-${height}px)`;
                 hoveredElem.moved = true;
+                draggedElement.style.transform = `translateY(${height * (positionHovered - positionDragged)}px)`;
             }
             else {
                 hoveredElem.style.transform = ``;
                 hoveredElem.moved = false;
+                draggedElement.style.transform = `translateY(${height * (positionHovered - positionDragged - 1)}px)`;
             }
         }
     }
@@ -66,6 +70,7 @@ ol.addEventListener('dragover', (event) => {
 //     return Math.floor(mouseDistanceFromFirstChildTop / heightOfOneElement);
 // }
 liItems.forEach((li) => {
+    li.moved = false;
     li.addEventListener('transitionstart', () => {
         li.classList.add('no-pointer-events');
     });
@@ -75,8 +80,7 @@ liItems.forEach((li) => {
     li.addEventListener('dragstart', (event) => {
         // setTimeout(() => {
         li.classList.add('dragged');
-        // li.addEventListener('transtion')
-        // },0)
+        // }, 0)
         // li.setAttribute('initialY', `${event.clientY}`)
     });
     li.addEventListener('dragend', () => {

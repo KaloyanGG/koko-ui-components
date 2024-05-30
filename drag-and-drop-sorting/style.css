@@ -33,7 +33,7 @@ body {
     flex-direction: column;
     li {
       padding: 5%;
-      transition: transform 1s ease;
+      transition: transform 0.5s ease;
     }
     li:nth-child(odd) {
       background-color: aliceblue;

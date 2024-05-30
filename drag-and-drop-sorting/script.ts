@@ -4,7 +4,6 @@ const submitBtn = document.querySelector('button#add-item') as HTMLButtonElement
 const inputElement = document.querySelector('input')!;
 
 const form = document.querySelector('form')!;
-console.log(form)
 form.onsubmit = (event: SubmitEvent) => {
     event.preventDefault();
     const value = inputElement.value.trim();
@@ -23,11 +22,6 @@ form.onsubmit = (event: SubmitEvent) => {
     inputElement.value = '';
 }
 
-let arrayOfLiItems = [...liItems]
-
-let times = 1
-let elementsAbove = []
-let elementsBelow = []
 ol.addEventListener('dragover', (event: DragEvent) => {
     event.preventDefault();
 

@@ -4,7 +4,6 @@ const liItems = document.querySelectorAll('li');
 const submitBtn = document.querySelector('button#add-item');
 const inputElement = document.querySelector('input');
 const form = document.querySelector('form');
-console.log(form);
 form.onsubmit = (event) => {
     event.preventDefault();
     const value = inputElement.value.trim();
@@ -19,10 +18,6 @@ form.onsubmit = (event) => {
     ol.appendChild(li);
     inputElement.value = '';
 };
-let arrayOfLiItems = [...liItems];
-let times = 1;
-let elementsAbove = [];
-let elementsBelow = [];
 ol.addEventListener('dragover', (event) => {
     event.preventDefault();
     const hoveredElem = event.target;

@@ -11,6 +11,13 @@ form.onsubmit = (event) => {
         return alert('Please insert a value');
     }
     const li = document.createElement('li');
+    li.addEventListener('dragstart', (event) => {
+        li.classList.add('dragged');
+    });
+    li.addEventListener('dragend', () => {
+        li.classList.remove('dragged');
+    });
+    li.draggable = true;
     li.setAttribute('id', (Array.from(ol.children)
         .reduce((maxId, li) => Math.max(maxId, parseInt(li.id)), 0) + 1)
         .toString());
@@ -18,67 +25,43 @@ form.onsubmit = (event) => {
     ol.appendChild(li);
     inputElement.value = '';
 };
-ol.addEventListener('dragover', (event) => {
-    event.preventDefault();
-    const hoveredElem = event.target;
+ol.addEventListener('dragover', (ev) => {
+    ev.preventDefault();
+    const hoveredElem = ev.target;
     const draggedElement = ol.querySelector('.dragged');
-    const height = draggedElement.getBoundingClientRect().height;
-    const no = document.querySelector('.no-pointer-events');
-    if (hoveredElem.tagName === "LI"
-        && hoveredElem !== draggedElement
-    // && no === null
-    ) {
-        // console.log(no)
-        // console.log(hoveredElem)
-        const positionHovered = parseInt(hoveredElem.getAttribute('data-position'));
-        const positionDragged = parseInt(draggedElement.getAttribute('data-position'));
-        if (positionDragged > positionHovered) {
-            if (hoveredElem.moved !== true) {
-                hoveredElem.style.transform = `translateY(${height}px)`;
-                hoveredElem.moved = true;
-                draggedElement.style.transform = `translateY(${height * (positionHovered - positionDragged)}px)`;
+    if (hoveredElem !== draggedElement && hoveredElem.tagName === "LI") {
+        if (draggedElement.getBoundingClientRect().top < hoveredElem.getBoundingClientRect().top) {
+            // If the dragged element is above the hovered element, insert the dragged element before the next sibling of the hovered element
+            if (hoveredElem.nextSibling) {
+                ol.insertBefore(draggedElement, hoveredElem.nextSibling);
             }
             else {
-                hoveredElem.style.transform = ``;
-                hoveredElem.moved = false;
-                draggedElement.style.transform = `translateY(${height * (positionHovered - positionDragged + 1)}px)`;
+                ol.appendChild(draggedElement);
             }
         }
         else {
-            if (hoveredElem.moved !== true) {
-                hoveredElem.style.transform = `translateY(-${height}px)`;
-                hoveredElem.moved = true;
-                draggedElement.style.transform = `translateY(${height * (positionHovered - positionDragged)}px)`;
-            }
-            else {
-                hoveredElem.style.transform = ``;
-                hoveredElem.moved = false;
-                draggedElement.style.transform = `translateY(${height * (positionHovered - positionDragged - 1)}px)`;
-            }
+            // If the dragged element is below the hovered element, insert the dragged element before the hovered element
+            ol.insertBefore(draggedElement, hoveredElem);
         }
     }
 });
-// function getNumberOfElementsWeWentInto(event: DragEvent, parent: HTMLElement, heightOfOneElement: number) {
-//     const mouseY = event.clientY;
-//     const firstChildTop = parent.firstElementChild!.getBoundingClientRect().top;
-//     const mouseDistanceFromFirstChildTop = mouseY - firstChildTop;
-//     return Math.floor(mouseDistanceFromFirstChildTop / heightOfOneElement);
-// }
 liItems.forEach((li) => {
-    li.moved = false;
-    li.addEventListener('transitionstart', () => {
-        li.classList.add('no-pointer-events');
-    });
-    li.addEventListener('transitionend', () => {
-        li.classList.remove('no-pointer-events');
-    });
     li.addEventListener('dragstart', (event) => {
-        // setTimeout(() => {
         li.classList.add('dragged');
-        // }, 0)
-        // li.setAttribute('initialY', `${event.clientY}`)
     });
     li.addEventListener('dragend', () => {
         li.classList.remove('dragged');
     });
 });
+// function throttle(operation: (event: DragEvent) => void, ms: number) {
+//     let hasExecuted = false
+//     return function throttledOperation(event: DragEvent) {
+//         if (!hasExecuted) {
+//             hasExecuted = true
+//             operation(event)
+//             setTimeout(() => {
+//                 hasExecuted = false
+//             }, ms)
+//         }
+//     }
+// }

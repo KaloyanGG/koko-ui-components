@@ -12,7 +12,7 @@ body {
   display: grid;
   place-items: center;
   section {
-    height: 70vh;
+    /* height: 70vh; */
     width: 70vw;
   }
 }
@@ -22,25 +22,21 @@ body {
   height: 100%;
   display: grid;
   grid-template-columns: 60% 40%;
-  /* & > * {
-    border-radius: inherit;
-  } */
 
   ol.list {
-    scroll-snap-type: none;
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
+    border: 1px solid black;
     li {
       padding: 5%;
-      transition: transform 0.5s ease;
+      /* border-top: none; */
+      &:not(:last-child){
+        border-bottom: 1px solid black;
+      }
     }
-    li:nth-child(odd) {
+    /* li:nth-child(odd) {
       background-color: aliceblue;
-    }
-    li:hover {
-      background-color: lightblue;
-    }
+    } */
   }
 
   form {
@@ -57,7 +53,6 @@ body {
       height: 5%;
       width: 80%;
       &:focus {
-        /* border: 30px solid black; */
         outline: 1px solid black;
       }
     }
@@ -69,8 +64,6 @@ body {
   }
 }
 .dragged {
-  background-color: red !important;
-  /* opacity: 0; */
 }
 
 .no-pointer-events {

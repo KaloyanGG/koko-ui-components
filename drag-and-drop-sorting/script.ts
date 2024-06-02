@@ -2,7 +2,9 @@ function renderDragAndDrop(container: Element, contents: string[]) {
     container.innerHTML += `
     <div class="drag-and-drop">
         <ol>
-            ${contents.map((c, idx) => `<li id=${idx} draggable="true">${c}</li>`).join('')}
+            ${contents.map((c, idx) => `<li id=${idx} class="hoverable" draggable="true">${c}
+                <svg width="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg>
+            </li>`).join('')}
         </ol>
         <form class="functionality-wrapper">
             <input type="text">
@@ -14,16 +16,24 @@ function renderDragAndDrop(container: Element, contents: string[]) {
     const liItems = container.querySelectorAll('li');
     const inputElement = container.querySelector('input')!;
     const form = container.querySelector('form')!;
+    const svgs = container.querySelectorAll('svg')!;
 
     form.onsubmit = formOnSubmit;
     ol.ondragover = olOnDragover;
+    svgs.forEach((svg: SVGSVGElement) => {
+        svg.onclick = svgOnClick
+    })
+
+
     liItems.forEach((li: HTMLLIElement) => {
         li.addEventListener('dragstart', () => {
             li.classList.add('dragged')
+            liItems.forEach(li => li.classList.remove('hoverable'))
         })
 
         li.addEventListener('dragend', () => {
             li.classList.remove('dragged')
+            liItems.forEach(li => li.classList.add('hoverable'))
         })
     })
 
@@ -41,6 +51,7 @@ function renderDragAndDrop(container: Element, contents: string[]) {
         li.addEventListener('dragend', () => {
             li.classList.remove('dragged');
         })
+        li.classList.add('hoverable');
         li.draggable = true;
         li.setAttribute(
             'id',
@@ -48,14 +59,17 @@ function renderDragAndDrop(container: Element, contents: string[]) {
                 .reduce((maxId, li) => Math.max(maxId, parseInt(li.id)), 0) + 1)
                 .toString()
         );
-        li.textContent = value;
+        li.innerHTML = `${value}
+        <svg class="delete-icon" width="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path>
+        </svg>`;
+        li.querySelector('svg')!.onclick = svgOnClick
         ol.appendChild(li);
         inputElement.value = '';
     }
 
     function olOnDragover(ev: DragEvent) {
         ev.preventDefault();
-
         const hoveredElem = ev.target as HTMLLIElement | HTMLOListElement;
         const draggedElement = ol.querySelector('.dragged') as HTMLLIElement;
 
@@ -65,6 +79,12 @@ function renderDragAndDrop(container: Element, contents: string[]) {
                 : hoveredElem;
             ol.insertBefore(draggedElement, referenceNode);
         }
+    }
+
+    function svgOnClick(ev: MouseEvent) {
+        const target = ev.target as HTMLElement;
+        const parentLi = target.closest('li')!;
+        parentLi.remove();
     }
 }
 const container = document.querySelector('.container');

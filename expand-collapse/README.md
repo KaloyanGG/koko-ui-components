@@ -3,3 +3,4 @@
 3. The component is responsive and adapts to different screen sizes.
 4. The "main" component is not considered part of this component.
 5. It includes transitions, hover effects, and a responsive button.
+6. Please note that as I am using nested CSS, some browsers might not support it.

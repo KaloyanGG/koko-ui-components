@@ -12,15 +12,15 @@
   justify-content: space-between;
   align-items: center;
 }
-/* .drag-and-drop li:not(.dragged):hover > svg {
-  visibility: visible;
-} */
+
 .drag-and-drop li.hoverable:hover > svg{
   visibility: visible;
 }
+.drag-and-drop li p {
+  width: 85%;
+}
 .drag-and-drop li svg {
-  min-width: 30px;
-  min-width: 2.5vw;
+  width: clamp(18px, 15%, 30px);
   visibility: hidden;
 }
 
@@ -40,7 +40,6 @@ form.functionality-wrapper {
 .functionality-wrapper input {
   padding: 3%;
   border-radius: 10px;
-  height: 5%;
   width: 80%;
 }
 
@@ -49,9 +48,8 @@ form.functionality-wrapper {
 }
 
 .functionality-wrapper button {
-  height: 5vh;
-  border-radius: 50%;
-  width: 15%;
+  padding: 1vh 2vw;
+  border-radius: 10px;
 }
 
 .no-pointer-events {

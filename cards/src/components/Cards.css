@@ -1,0 +1,46 @@
+.cards-component {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2vw;
+    color: white;
+    font-size: 0.8rem;
+    .card {
+        padding: 1rem;
+        background-color: black;
+        border-radius: 30px;
+        text-align: center;
+        box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 0.5);
+        /* aspect-ratio: 1/1.75; */
+        
+        &:hover{
+            transform: rotateY(180deg);
+        }
+        .front {
+            width: 100%;
+            height: 100%;
+            img.image {
+                max-width: 100%;
+                height: 70%;
+            }
+            p {
+                /* todo fix this shit */
+                margin: auto;
+            }
+            p.name {
+                height: 20%;
+                font-size: 1.75em;
+                display: flex;
+                align-items: center;
+            }
+            p.price {
+                font-size: 1.25em;
+                height: 10%;
+            }
+        }
+        .back {
+            display: none;
+        }
+    }
+}

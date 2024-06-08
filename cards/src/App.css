@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    list-style: none;
+    line-height: 1;
+}
+body {
+    width: 100vw;
+    min-height: 100vh;
+    background: rgb(162, 74, 221);
+    background: linear-gradient(
+        51deg,
+        rgba(162, 74, 221, 1) 0%,
+        rgba(202, 41, 92, 1) 22%,
+        rgba(253, 29, 29, 1) 46%,
+        rgba(252, 123, 42, 1) 63%,
+        rgba(252, 156, 53, 1) 80%,
+        rgba(252, 176, 69, 1) 100%
+    );
+}
+.App {
+    margin: auto;
+    width: 80vw;
+    padding-top: 10vh;
+    /* outline: 1px solid brown; */
+}

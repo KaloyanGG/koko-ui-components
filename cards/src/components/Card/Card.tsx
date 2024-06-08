@@ -4,7 +4,7 @@ type CardProps = {
     product: Product
 }
 
-export default function Card({product}: CardProps): JSX.Element {
+export default function Card({ product }: CardProps): JSX.Element {
     return (
         <div className="card">
             <div className="front">
@@ -13,30 +13,32 @@ export default function Card({product}: CardProps): JSX.Element {
                 <p className="name">
                     {product.name}
                 </p>
-                <p className="price">
-                    {product.sale_price}
-                </p>
             </div>
             <div className="back">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Brand name</th>
-                            <th>Pack</th>
-                            <th>Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>35747</td>
-                            <td>Kevin Levrone</td>
-                            <td>2000 грама, 67 Дози</td>
-                            <td>179.95</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div>Id</div>
+                <div>{product.id}</div>
+                <div>Price</div>
+                <div className="price">
+                    <span className="regular-price">
+                        {product.regular_price}
+                    </span>
+                    &nbsp;
+                    <span className="sale-price">
+                        {product.sale_price}
+                    </span>
+                </div>
+                <div>Brand</div>
+                <div>{product.brand_name}</div>
+                <div>Pack</div>
+                <div>{product.pack}</div>
+                <div>URL</div>
+                <div>
+                    <a href={product.url}
+                        target="_blank" rel="noreferrer">
+                        {product.url}
+                    </a>
+                </div>
             </div>
         </div>
-    )
+    );
 }

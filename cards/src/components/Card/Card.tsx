@@ -32,13 +32,16 @@ export default function Card({ product }: CardProps): JSX.Element {
                     <div>{product.brand_name}</div>
                     <div>Pack</div>
                     <div>{product.pack}</div>
-                    <div>URL</div>
-                    <div>
+                    {/* <div>
                         <a href={product.url}
                             target="_blank" rel="noreferrer">
                             {product.url}
                         </a>
-                    </div>
+                    </div> */}
+                        <a className="visit-page" href={product.url}
+                            target="_blank" rel="noreferrer">
+                            Visit Page
+                        </a>
                 </div>
             </div>
         </div>

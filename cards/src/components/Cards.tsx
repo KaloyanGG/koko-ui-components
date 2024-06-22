@@ -27,6 +27,19 @@ export default function Cards(): JSX.Element {
                         (data.products as Product[])
                             .slice(0, 4)
                     )
+                    // setProducts(
+                    //     (data.products as Product[])
+                    //         .slice(0, 4)
+                    //         .map((product, index) => {
+                    //             if (index === 2) { // Check if it's the 3rd product (index 2)
+                    //                 return {
+                    //                     ...product,
+                    //                     image: "https://media.istockphoto.com/id/1672317574/photo/ama-dablam-mountain-peak.webp?b=1&s=170667a&w=0&k=20&c=Ea8yDEHpUemrRuMZUKGPDBE11YTWVksIupMN8FkEBf8="
+                    //                 };
+                    //             }
+                    //             return product;
+                    //         })
+                    // )
                 })
         }, 2000)
     }, [])

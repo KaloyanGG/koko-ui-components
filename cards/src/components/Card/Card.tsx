@@ -25,23 +25,22 @@ export default function Card({ product }: CardProps): JSX.Element {
                         </span>
                         &nbsp;
                         <span className="sale-price">
-                            {product.sale_price}
+                            {
+                                `${Math.floor(Number(product.sale_price))}`
+                            }
+                            <sup>
+                                {`${product.sale_price}`.split('.')[1]}
+                            </sup>лв
                         </span>
                     </div>
                     <div>Brand</div>
                     <div>{product.brand_name}</div>
                     <div>Pack</div>
                     <div>{product.pack}</div>
-                    {/* <div>
-                        <a href={product.url}
-                            target="_blank" rel="noreferrer">
-                            {product.url}
-                        </a>
-                    </div> */}
-                        <a className="visit-page" href={product.url}
-                            target="_blank" rel="noreferrer">
-                            Visit Page
-                        </a>
+                    <a className="visit-page" href={product.url}
+                        target="_blank" rel="noreferrer">
+                        Visit Page
+                    </a>
                 </div>
             </div>
         </div>

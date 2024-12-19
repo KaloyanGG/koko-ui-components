@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+main.recipe-details-container {
+  margin: 10vh auto;
+  max-width: 900px;
+  outline: 1px solid black;
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  overflow: auto;
+  div.recipe-details {
+    width: 60%;
+
+    max-height: 60vh;
+    overflow: hidden;
+
+    display: flex;
+    flex-shrink: 0;
+    border: 2px solid orange;
+    div.left {
+      width: 35%;
+      background-color: yellowgreen;
+      /* transition: width 10s steps(10); */
+      /* transition: width 0.5s ease; */
+    }
+    div.right {
+      width: 75%;
+      transition: width 5s linear;
+    }
+  }
+  div.recipe-details.outside {
+    opacity: 0.5;
+    width: 30%;
+    div.left {
+      width: 100%;
+    }
+    div.right {
+      width: 0;
+      height: 0;
+    }
+  }
+}

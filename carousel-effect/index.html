@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main class="recipe-details-container"></main>
+  </body>
+  <script>
+    let middleNode = null;
+
+    function handleClick(event) {
+      const container = event.currentTarget;
+      if (container === middleNode) return;
+
+      container.classList.remove("outside");
+      middleNode?.classList.add("outside");
+      container.scrollIntoView({ behavior: "smooth", inline: "center" });
+      middleNode = container;
+    }
+
+    function createRecipeCard(index, middleIndex) {
+      const container = document.createElement("div");
+      container.classList.add("recipe-details");
+      if (index !== middleIndex) {
+        container.classList.add("outside");
+      } else {
+        middleNode = container;
+      }
+      container.onclick = handleClick;
+
+      const left = document.createElement("div");
+      left.classList.add("left");
+
+      const right = document.createElement("div");
+      right.classList.add("right");
+
+      const heading = document.createElement("h1");
+      heading.textContent =
+        index !== 2
+          ? "Some heading"
+          : "VEERRY MUUUCH LOOONGERRE HADGINE HAHEHE";
+
+      const paragraph = document.createElement("p");
+      paragraph.textContent =
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias, voluptatum nobis accusamus at accusantium maxime quis facere sequi, earum, ut expedita ullam suscipit dicta dolorum officiis eveniet. Minima cumque quas distinctio ipsum dolorum ut dolore. Sunt, accusamus dolorum autem maxime id, exercitationem soluta, et minima molestiae vero similique labore cupiditate ipsa aperiam repudiandae sint quas totam eaque at sit fugit harum corporis! Veniam id et mollitia, dignissimos ipsa aliquid quia. Natus fugiat quo quasi laudantium, reiciendis pariatur delectus molestias soluta? Fuga natus magnam dolorum, qui, esse odit provident nihil nesciunt molestiae, dicta tempore. In aspernatur perspiciatis esse maxime, alias inventore?";
+
+      right.appendChild(heading);
+      right.appendChild(paragraph);
+      container.appendChild(left);
+      container.appendChild(right);
+
+      return container;
+    }
+
+    function initializeRecipeCards() {
+      const mainContainer = document.querySelector(".recipe-details-container");
+      const middleIndex = 3;
+
+      for (let i = 0; i < 7; i++) {
+        const recipeCard = createRecipeCard(i, middleIndex);
+        mainContainer.appendChild(recipeCard);
+      }
+
+      // Scroll to the middle card
+      middleNode.scrollIntoView({ behavior: "smooth", inline: "center" });
+    }
+
+    // Initialize recipe cards
+    initializeRecipeCards();
+  </script>
+</html>

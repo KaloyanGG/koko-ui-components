@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="open">open</button>
+
+    <dialog id="modal">
+      <!-- Stops the form from submitting -->
+      <!-- <form method="dialog">
+        <input type="text" name="" id="" />
+        <button type="submit">Submit</button>
+      </form> -->
+      <form>
+        <input type="text" name="" id="" />
+        <!-- Stops the form from submitting -->
+        <button type="submit" formmethod="dialog">Cancel</button>
+        <button type="submit">Submit</button>
+      </form>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>

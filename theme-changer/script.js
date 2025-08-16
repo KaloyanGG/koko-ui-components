@@ -1,6 +1,5 @@
 "use strict";
 const changeThemeButton = document.getElementById('change-theme');
-// TODO dynamic icon size
 function getCurrentTheme() {
     return document.documentElement.getAttribute('data-theme') || 'light';
 }
